@@ -1,0 +1,54 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<header class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-10">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2">
+        <div class="w-10 h-10 rounded-lg bg-[#1e3a8a] flex items-center justify-center">
+          <Icon name="logo" class="w-6 h-6 text-white" />
+        </div>
+        <span class="text-xl font-bold text-primary dark:text-white">VTuber Insights</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/news" class="nav-link">News</a>
+        <a href="/directory" class="nav-link">Directory</a>
+        <a href="/categories" class="nav-link">Categories</a>
+        <a href="/about" class="nav-link">About</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <ThemeToggle />
+        <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700">
+          <Icon name="menu" class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+      <nav class="flex flex-col gap-2">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/news" class="nav-link">News</a>
+        <a href="/directory" class="nav-link">Directory</a>
+        <a href="/categories" class="nav-link">Categories</a>
+        <a href="/about" class="nav-link">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>
+

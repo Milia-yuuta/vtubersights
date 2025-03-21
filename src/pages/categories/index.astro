@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CategoryCard from '../../components/CategoryCard.astro';
+
+// Mock data - in a real app, this would come from a CMS or API
+const categories = [
+  {
+    name: "Gaming",
+    description: "VTubers focused on streaming various games, from RPGs to FPS and everything in between.",
+    icon: "gamepad",
+    count: 245,
+    slug: "gaming"
+  },
+  {
+    name: "Music",
+    description: "Talented VTubers who create, perform, and share music as their primary content.",
+    icon: "music",
+    count: 128,
+    slug: "music"
+  },
+  {
+    name: "Art",
+    description: "Creative VTubers who showcase their artistic talents through drawing, design, and more.",
+    icon: "palette",
+    count: 96,
+    slug: "art"
+  },
+  {
+    name: "Tech",
+    description: "Tech-savvy VTubers who focus on programming, gadgets, and technology discussions.",
+    icon: "code",
+    count: 64,
+    slug: "tech"
+  },
+  {
+    name: "Variety",
+    description: "VTubers who create diverse content, from gaming to chatting, cooking, and more.",
+    icon: "layers",
+    count: 187,
+    slug: "variety"
+  },
+  {
+    name: "ASMR",
+    description: "VTubers specializing in ASMR content to help viewers relax and unwind.",
+    icon: "headphones",
+    count: 52,
+    slug: "asmr"
+  },
+  {
+    name: "Educational",
+    description: "VTubers who focus on teaching and sharing knowledge on various subjects.",
+    icon: "book",
+    count: 38,
+    slug: "educational"
+  },
+  {
+    name: "Comedy",
+    description: "VTubers who specialize in humor, skits, and making their audience laugh.",
+    icon: "smile",
+    count: 76,
+    slug: "comedy"
+  }
+];
+---
+
+<Layout title="VTuber Categories">
+  <div class="max-w-4xl mx-auto">
+    <h1>VTuber Categories</h1>
+    <p class="text-xl text-slate-600 dark:text-slate-400 mb-12">
+      Explore VTubers by their content focus and find exactly what you're looking for.
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    {categories.map(category => (
+      <CategoryCard {...category} />
+    ))}
+  </div>
+</Layout>
+

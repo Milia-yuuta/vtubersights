@@ -1,0 +1,68 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-8">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <a href="/" class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+            <Icon name="logo" class="w-5 h-5 text-white" />
+          </div>
+          <span class="text-lg font-bold text-[#1e3a8a] dark:text-white">VTuber Insights</span>
+        </a>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          Your go-to source for the latest VTuber news, trends, and discoveries.
+        </p>
+        <div class="flex gap-4 mt-4">
+          <a href="#" class="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">
+            <Icon name="twitter" class="w-5 h-5" />
+          </a>
+          <a href="#" class="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">
+            <Icon name="youtube" class="w-5 h-5" />
+          </a>
+          <a href="#" class="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">
+            <Icon name="discord" class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg mb-4">Navigation</h3>
+        <ul class="space-y-2">
+          <li><a href="/" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Home</a></li>
+          <li><a href="/news" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">News</a></li>
+          <li><a href="/directory" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Directory</a></li>
+          <li><a href="/categories" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Categories</a></li>
+          <li><a href="/about" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">About</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg mb-4">Categories</h3>
+        <ul class="space-y-2">
+          <li><a href="/categories/gaming" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Gaming</a></li>
+          <li><a href="/categories/music" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Music</a></li>
+          <li><a href="/categories/art" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Art</a></li>
+          <li><a href="/categories/tech" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Tech</a></li>
+          <li><a href="/categories/variety" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Variety</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg mb-4">Legal</h3>
+        <ul class="space-y-2">
+          <li><a href="/privacy" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Terms of Service</a></li>
+          <li><a href="/contact" class="text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-200 dark:border-slate-700 mt-8 pt-8 text-center text-sm text-slate-500 dark:text-slate-400">
+      <p>&copy; {new Date().getFullYear()} VTuber Insights. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+

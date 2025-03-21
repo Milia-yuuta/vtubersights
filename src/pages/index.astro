@@ -1,0 +1,245 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NewsCard from '../components/NewsCard.astro';
+import VTuberCard from '../components/VTuberCard.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import FeaturedVTuber from '../components/FeaturedVTuber.astro';
+import { Icon } from 'astro-icon/components';
+
+// Mock data - in a real app, this would come from a CMS or API
+const featuredNews = [
+  {
+    title: "HoloEN Announces New Concert Series",
+    excerpt: "Hololive English has announced a new virtual concert series starting next month, featuring all members from its three generations.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 15, 2023",
+    category: "Events",
+    slug: "holoen-announces-new-concert-series"
+  },
+  {
+    title: "Nijisanji Reveals New VTuber Generation",
+    excerpt: "Nijisanji has announced their newest English VTuber generation, set to debut next week with five new members.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 12, 2023",
+    category: "Debuts",
+    slug: "nijisanji-reveals-new-vtuber-generation"
+  },
+  {
+    title: "Independent VTuber Reaches 1 Million Subscribers",
+    excerpt: "Popular independent VTuber has reached a major milestone, celebrating 1 million YouTube subscribers after just one year of activity.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 10, 2023",
+    category: "Milestones",
+    slug: "independent-vtuber-reaches-1-million-subscribers"
+  }
+];
+
+const popularCategories = [
+  {
+    name: "Gaming",
+    description: "VTubers focused on streaming various games, from RPGs to FPS and everything in between.",
+    icon: "gamepad",
+    count: 245,
+    slug: "gaming"
+  },
+  {
+    name: "Music",
+    description: "Talented VTubers who create, perform, and share music as their primary content.",
+    icon: "music",
+    count: 128,
+    slug: "music"
+  },
+  {
+    name: "Art",
+    description: "Creative VTubers who showcase their artistic talents through drawing, design, and more.",
+    icon: "palette",
+    count: 96,
+    slug: "art"
+  },
+  {
+    name: "Tech",
+    description: "Tech-savvy VTubers who focus on programming, gadgets, and technology discussions.",
+    icon: "code",
+    count: 64,
+    slug: "tech"
+  }
+];
+
+const trendingVTubers = [
+  {
+    name: "Amelia Watson",
+    image: "/placeholder.svg?height=400&width=400",
+    agency: "Hololive EN",
+    categories: ["Gaming", "Variety"],
+    slug: "amelia-watson",
+    subscribers: "1.8M"
+  },
+  {
+    name: "Vox Akuma",
+    image: "/placeholder.svg?height=400&width=400",
+    agency: "Nijisanji EN",
+    categories: ["Gaming", "ASMR"],
+    slug: "vox-akuma",
+    subscribers: "1.2M"
+  },
+  {
+    name: "Ironmouse",
+    image: "/placeholder.svg?height=400&width=400",
+    agency: "VShojo",
+    categories: ["Music", "Gaming"],
+    slug: "ironmouse",
+    subscribers: "1.5M"
+  },
+  {
+    name: "Kizuna AI",
+    image: "/placeholder.svg?height=400&width=400",
+    agency: "Independent",
+    categories: ["Music", "Variety"],
+    slug: "kizuna-ai",
+    subscribers: "3.0M"
+  }
+];
+
+const featuredVTuber = {
+  name: "Gawr Gura",
+  image: "/placeholder.svg?height=600&width=600",
+  description: "A descendant of the Lost City of Atlantis, who swam to Earth while saying, \"It's so boring down there LOLOLOL!\" Gura loves everything that has to do with the ocean and marine life.",
+  agency: "Hololive EN",
+  categories: ["Gaming", "Music", "Variety"],
+  slug: "gawr-gura",
+  socialLinks: {
+    youtube: "https://youtube.com",
+    twitter: "https://twitter.com",
+    twitch: "https://twitch.tv"
+  }
+};
+---
+
+<Layout title="Home">
+  <!-- Hero Section -->
+  <section class="py-12 md:py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          Discover the World of <span class="bg-clip-text text-primary bg-gradient-to-r">VTubers</span>
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 mt-6 mb-8">
+          Your ultimate guide to virtual entertainers. Stay updated with the latest news, discover new talents, and explore the growing VTuber ecosystem.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/directory" class="btn-secondary">
+            <Icon name="search" class="w-5 h-5 mr-2" />
+            Explore Directory
+          </a>
+          <a href="/news" class="btn-secondary">
+            <Icon name="newspaper" class="w-5 h-5 mr-2" />
+            Latest News
+          </a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl"></div>
+        <img 
+          src="/placeholder.svg?height=600&width=600" 
+          alt="VTuber Illustration" 
+          class="w-full h-auto rounded-xl"
+        />
+      </div>
+    </div>
+  </section>
+  
+  <!-- Latest News Section -->
+  <section class="py-12 md:py-16">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold">Latest News</h2>
+      <a href="/news" class="text-primary dark:text-primary-light font-medium hover:underline flex items-center">
+        View All
+        <Icon name="arrow-right" class="w-4 h-4 ml-1" />
+      </a>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {featuredNews.map(news => (
+        <NewsCard {...news} />
+      ))}
+    </div>
+  </section>
+  
+  <!-- Categories Section -->
+  <section class="py-12 md:py-16 bg-slate-50 dark:bg-slate-800/50 -mx-4 px-4">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Browse by Category</h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          Explore VTubers by their content focus and find exactly what you're looking for
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {popularCategories.map(category => (
+          <CategoryCard {...category} />
+        ))}
+      </div>
+      
+      <div class="text-center mt-8">
+        <a href="/categories" class="btn-primary">
+          View All Categories
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Featured VTuber Section -->
+  <section class="py-12 md:py-16">
+    <div class="mb-12">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Featured VTuber</h2>
+      <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+    </div>
+    
+    <FeaturedVTuber {...featuredVTuber} />
+  </section>
+  
+  <!-- Trending VTubers Section -->
+  <section class="py-12 md:py-16">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold">Trending VTubers</h2>
+      <a href="/directory" class="text-primary dark:text-primary-light font-medium hover:underline flex items-center">
+        View All
+        <Icon name="arrow-right" class="w-4 h-4 ml-1" />
+      </a>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {trendingVTubers.map(vtuber => (
+        <VTuberCard {...vtuber} />
+      ))}
+    </div>
+  </section>
+  
+  <!-- Newsletter Section -->
+  <!--<section class="py-12 md:py-16 bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 rounded-2xl">-->
+  <!--  <div class="text-center max-w-2xl mx-auto px-4">-->
+  <!--    <h2 class="text-2xl md:text-3xl font-bold mb-4">Stay Updated</h2>-->
+  <!--    <p class="text-slate-600 dark:text-slate-400 mb-6">-->
+  <!--      Subscribe to our newsletter to receive the latest VTuber news, event announcements, and recommendations.-->
+  <!--    </p>-->
+  <!--    -->
+  <!--    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">-->
+  <!--      <input -->
+  <!--        type="email" -->
+  <!--        placeholder="Enter your email" -->
+  <!--        class="flex-grow px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary"-->
+  <!--        required-->
+  <!--      />-->
+  <!--      <button type="submit" class="btn-primary whitespace-nowrap">-->
+  <!--        Subscribe-->
+  <!--      </button>-->
+  <!--    </form>-->
+  <!--    -->
+  <!--    <p class="text-xs text-slate-500 dark:text-slate-400 mt-4">-->
+  <!--      By subscribing, you agree to our <a href="/privacy" class="underline">Privacy Policy</a>.-->
+  <!--    </p>-->
+  <!--  </div>-->
+  <!--</section>-->
+</Layout>
+

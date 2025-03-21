@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import { Icon } from 'astro-icon/components';
+
+// Mock data - in a real app, this would come from a CMS or API
+const newsCategories = [
+  "All", "Debuts", "Events", "Milestones", "Collaborations", "Announcements", "Industry"
+];
+
+const newsArticles = [
+  {
+    title: "HoloEN Announces New Concert Series",
+    excerpt: "Hololive English has announced a new virtual concert series starting next month, featuring all members from its three generations.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 15, 2023",
+    category: "Events",
+    slug: "holoen-announces-new-concert-series"
+  },
+  {
+    title: "Nijisanji Reveals New VTuber Generation",
+    excerpt: "Nijisanji has announced their newest English VTuber generation, set to debut next week with five new members.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 12, 2023",
+    category: "Debuts",
+    slug: "nijisanji-reveals-new-vtuber-generation"
+  },
+  {
+    title: "Independent VTuber Reaches 1 Million Subscribers",
+    excerpt: "Popular independent VTuber has reached a major milestone, celebrating 1 million YouTube subscribers after just one year of activity.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 10, 2023",
+    category: "Milestones",
+    slug: "independent-vtuber-reaches-1-million-subscribers"
+  },
+  {
+    title: "Major Collab Between Hololive and Nijisanji Announced",
+    excerpt: "In a surprising announcement, Hololive and Nijisanji have revealed plans for a major collaboration event featuring top VTubers from both agencies.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 8, 2023",
+    category: "Collaborations",
+    slug: "major-collab-between-hololive-and-nijisanji-announced"
+  },
+  {
+    title: "VTuber Convention Announced for Summer 2023",
+    excerpt: "A new VTuber-focused convention has been announced for Summer 2023, promising panels, meet-and-greets, and exclusive merchandise.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 5, 2023",
+    category: "Events",
+    slug: "vtuber-convention-announced-for-summer-2023"
+  },
+  {
+    title: "New VTuber Technology Unveiled at Tech Conference",
+    excerpt: "A cutting-edge VTuber technology was unveiled at the latest tech conference, promising more realistic avatars and improved tracking.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 3, 2023",
+    category: "Industry",
+    slug: "new-vtuber-technology-unveiled-at-tech-conference"
+  },
+  {
+    title: "Popular VTuber Announces Graduation",
+    excerpt: "A beloved VTuber has announced their graduation, with a farewell stream scheduled for the end of the month.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "March 1, 2023",
+    category: "Announcements",
+    slug: "popular-vtuber-announces-graduation"
+  },
+  {
+    title: "VTuber Agency Expands to New Region",
+    excerpt: "A major VTuber agency has announced plans to expand to a new region, with auditions opening next month.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "February 28, 2023",
+    category: "Industry",
+    slug: "vtuber-agency-expands-to-new-region"
+  },
+  {
+    title: "Record-Breaking Charity Stream by VTuber Group",
+    excerpt: "A group of VTubers has raised over $500,000 for charity in a 24-hour marathon stream, breaking previous records.",
+    image: "/placeholder.svg?height=400&width=600",
+    date: "February 25, 2023",
+    category: "Milestones",
+    slug: "record-breaking-charity-stream-by-vtuber-group"
+  }
+];
+---
+
+<Layout title="Latest VTuber News">
+  <div class="max-w-4xl mx-auto">
+    <h1>VTuber News</h1>
+    <p class="text-xl text-slate-600 dark:text-slate-400 mb-8">
+      Stay updated with the latest news, announcements, and events from the VTuber world.
+    </p>
+    
+    <!-- Categories Filter -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      {newsCategories.map(category => (
+        <a 
+          href={category === "All" ? "/news" : `/news/category/${category.toLowerCase()}`}
+          class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            category === "All" 
+              ? "bg-primary text-white hover:bg-primary/90" 
+              : "bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
+          }`}
+        >
+          {category}
+        </a>
+      ))}
+    </div>
+    
+    <!-- Search Bar -->
+    <div class="relative mb-8">
+      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <Icon name="search" class="w-5 h-5 text-slate-400" />
+      </div>
+      <input 
+        type="search" 
+        placeholder="Search news articles..." 
+        class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary"
+      />
+    </div>
+  </div>
+  
+  <!-- News Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {newsArticles.map(article => (
+      <NewsCard {...article} />
+    ))}
+  </div>
+  
+  <!-- Pagination -->
+  <div class="flex justify-center mt-12">
+    <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+      <a
+        href="#"
+        class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
+      >
+        <span class="sr-only">Previous</span>
+        <Icon name="chevron-left" class="h-5 w-5" />
+      </a>
+      <a
+        href="#"
+        aria-current="page"
+        class="relative inline-flex items-center px-4 py-2 border border-primary bg-primary text-sm font-medium text-white"
+      >
+        1
+      </a>
+      <a
+        href="#"
+        class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
+      >
+        2
+      </a>
+      <a
+        href="#"
+        class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
+      >
+        3
+      </a>
+      <span class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300">
+        ...
+      </span>
+      <a
+        href="#"
+        class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
+      >
+        8
+      </a>
+      <a
+        href="#"
+        class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
+      >
+        9
+      </a>
+      <a
+        href="#"
+        class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
+      >
+        <span class="sr-only">Next</span>
+        <Icon name="chevron-right" class="h-5 w-5" />
+      </a>
+    </nav>
+  </div>
+</Layout>
+

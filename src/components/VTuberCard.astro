@@ -1,0 +1,48 @@
+---
+export interface Props {
+  name: string;
+  image: string;
+  agency?: string;
+  categories: string[];
+  slug: string;
+  subscribers?: string;
+}
+
+const { name, image, agency, categories, slug, subscribers } = Astro.props;
+---
+
+<article class="card h-full flex flex-col">
+  <a href={`/vtuber/${slug}`} class="block overflow-hidden aspect-square">
+    <img 
+      src={image || "/placeholder.svg"} 
+      alt={name} 
+      class="w-full h-full object-cover transition-transform hover:scale-105"
+    />
+  </a>
+  <div class="p-5">
+    <h3 class="text-xl font-bold mb-1">
+      <a href={`/vtuber/${slug}`} class="hover:text-primary dark:hover:text-primary-light">
+        {name}
+      </a>
+    </h3>
+    {agency && (
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">{agency}</p>
+    )}
+    <div class="flex flex-wrap gap-2 mb-3">
+      {categories.map(category => (
+        <a 
+          href={`/categories/${category.toLowerCase()}`}
+          class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
+        >
+          {category}
+        </a>
+      ))}
+    </div>
+    {subscribers && (
+      <p class="text-sm text-slate-600 dark:text-slate-400">
+        <span class="font-medium">{subscribers}</span> subscribers
+      </p>
+    )}
+  </div>
+</article>
+

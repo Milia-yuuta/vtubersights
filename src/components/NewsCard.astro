@@ -1,0 +1,40 @@
+---
+export interface Props {
+  title: string;
+  excerpt: string;
+  image: string;
+  date: string;
+  category: string;
+  slug: string;
+}
+
+const { title, excerpt, image, date, category, slug } = Astro.props;
+---
+
+<article class="card h-full flex flex-col">
+  <a href={`/news/${slug}`} class="block overflow-hidden aspect-video">
+    <img 
+      src={image || "/placeholder.svg"} 
+      alt={title} 
+      class="w-full h-full object-cover transition-transform hover:scale-105"
+    />
+  </a>
+  <div class="p-5 flex flex-col flex-grow">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-light">
+        {category}
+      </span>
+      <time class="text-xs text-slate-500 dark:text-slate-400">{date}</time>
+    </div>
+    <h3 class="text-xl font-bold mb-2 line-clamp-2">
+      <a href={`/news/${slug}`} class="hover:text-primary dark:hover:text-primary-light">
+        {title}
+      </a>
+    </h3>
+    <p class="text-slate-600 dark:text-slate-400 line-clamp-3 mb-4">{excerpt}</p>
+    <a href={`/news/${slug}`} class="mt-auto text-primary dark:text-primary-light font-medium hover:underline">
+      Read more
+    </a>
+  </div>
+</article>
+
